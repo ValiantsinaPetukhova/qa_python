@@ -64,7 +64,7 @@ class TestBooksCollector:
         collector.add_new_book(name)
         collector.set_book_genre(name, genre)
 
-        assert name, genre in collector.books_genre.items()
+        assert name, genre in collector.get_books_genre()
 
     @pytest.mark.parametrize(
         'name, genre',
@@ -80,7 +80,7 @@ class TestBooksCollector:
         collector.add_new_book(name)
         collector.set_book_genre(name, genre)
 
-        assert name, genre not in collector.books_genre.items()
+        assert name, genre not in collector.get_books_genre()
 
     @pytest.mark.parametrize(
         'name, genre',
@@ -96,7 +96,7 @@ class TestBooksCollector:
         collector.add_new_book(name)
         collector.set_book_genre(name, genre)
 
-        assert collector.books_genre.get(name) == genre
+        assert collector.get_books_genre().get(name) == genre
 
     def test_genre_list_is_true(self):
         # создаем экземпляр (объект) класса BooksCollector
@@ -193,7 +193,7 @@ class TestBooksCollector:
         # удаляем вторую книгу
         collector.delete_book_from_favorites(name_2)
 
-        assert name_2 not in collector.favorites
+        assert name_2 not in collector.get_list_of_favorites_books()
 
     @pytest.mark.parametrize(
         'name_1, name_2',
@@ -213,7 +213,7 @@ class TestBooksCollector:
         collector.add_book_in_favorites(name_1)
         collector.add_book_in_favorites(name_2)
 
-        assert collector.favorites == [name_1, name_2]
+        assert collector.get_list_of_favorites_books() == [name_1, name_2]
 
 
 
