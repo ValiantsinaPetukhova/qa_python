@@ -153,57 +153,41 @@ class TestBooksCollector:
 
         assert collector.get_books_for_children() == books_for_children
 
-    @pytest.mark.parametrize(
-        'name_1, name_2',
-        [
-            ['Человек-зверь', 'Сага о Форсайтах'],
-            ['Щегол', 'Ведьмак']
-        ])
-    def test_add_book_in_favorites_two_books(self, name_1, name_2):
+    def test_add_book_in_favorites_two_books(self):
         # создаем экземпляр (объект) класса BooksCollector
         collector = BooksCollector()
 
         # добавляем две книги
-        collector.add_new_book(name_1)
-        collector.add_new_book(name_2)
+        collector.add_new_book('Человек-зверь')
+        collector.add_new_book('Сага о Форсайтах')
 
         # добавляем книги в избранное
-        collector.add_book_in_favorites(name_1)
-        collector.add_book_in_favorites(name_2)
+        collector.add_book_in_favorites('Человек-зверь')
+        collector.add_book_in_favorites('Сага о Форсайтах')
         # проверяем, что добавилось именно две
         assert len(collector.get_list_of_favorites_books()) == 2
 
-    @pytest.mark.parametrize(
-        'name_1, name_2',
-        [
-            ['Человек-зверь', 'Сага о Форсайтах'],
-            ['Щегол', 'Ведьмак']
-        ])
-    def test_delete_book_from_favorites_one_book_remain(self, name_1, name_2):
+    def test_delete_book_from_favorites_one_book_remain(self):
         # создаем экземпляр (объект) класса BooksCollector
         collector = BooksCollector()
 
         # добавляем две книги
-        collector.add_new_book(name_1)
-        collector.add_new_book(name_2)
+        collector.add_new_book('Щегол')
+        collector.add_new_book('Ведьмак')
 
         # добавляем книги в избранное
-        collector.add_book_in_favorites(name_1)
-        collector.add_book_in_favorites(name_2)
+        collector.add_book_in_favorites('Щегол')
+        collector.add_book_in_favorites('Ведьмак')
         # удаляем вторую книгу
-        collector.delete_book_from_favorites(name_2)
+        collector.delete_book_from_favorites('Ведьмак')
 
-        assert name_2 not in collector.get_list_of_favorites_books()
+        assert 'Ведьмак' not in collector.get_list_of_favorites_books()
 
-    @pytest.mark.parametrize(
-        'name_1, name_2',
-        [
-            ['Человек-зверь', 'Сага о Форсайтах'],
-            ['Щегол', 'Ведьмак']
-        ])
-    def test_get_list_of_favorites_books_two_books(self, name_1, name_2):
+    def test_get_list_of_favorites_books_two_books(self):
         # создаем экземпляр (объект) класса BooksCollector
         collector = BooksCollector()
+        name_1 = 'Человек-зверь'
+        name_2 = 'Сага о Форсайтах'
 
         # добавляем две книги
         collector.add_new_book(name_1)
